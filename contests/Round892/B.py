@@ -1,0 +1,40 @@
+import collections
+import sys
+import heapq
+
+input = sys.stdin.readline
+
+
+def inp():
+    return (int(input()))
+def inlt():
+    return (list(map(int, input().split())))
+def insr():
+    s = input()
+    return (list(s[:len(s) - 1]))
+def invr():
+    return (map(int, input().split()))
+
+
+def solution():
+    n = inp()
+    small1 = []
+    small2 = []
+    for i in range(n):
+        mi = inp()
+        ai = inlt()
+        ai.sort()
+        small1.append(ai[0])
+        small2.append(ai[1])
+
+    small1.sort()
+    small2.sort()
+    print(sum(small2[1:]) + small1[0])
+
+    return 0
+
+
+if __name__ == '__main__':
+    t = inp()
+    for i in range(t):
+        solution()
