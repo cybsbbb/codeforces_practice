@@ -1,4 +1,4 @@
-from queue import Queue
+from collections import deque
 import sys
 
 input = sys.stdin.readline
@@ -35,14 +35,14 @@ class BipGraph(object):
     # Returns true if there is an augmenting path, else returns
     # false
     def bfs(self):
-        Q = Queue()
+        Q = deque()
         # First layer of vertices (set distance as 0)
         for u in range(1, self.__m + 1):
             # If this is a free vertex, add it to queue
             if self.__pairU[u] == NIL:
                 # u is not matched3
                 self.__dist[u] = 0
-                Q.put(u)
+                Q.append(u)
             # Else set distance as infinite so that this vertex
             # is considered next time
             else:
@@ -50,9 +50,9 @@ class BipGraph(object):
         # Initialize distance to NIL as infinite
         self.__dist[NIL] = INF
         # Q is going to contain vertices of left side only.
-        while not Q.empty():
+        while Q:
             # Dequeue a vertex
-            u = Q.get()
+            u = Q.popleft()
             # If this node is not NIL and can provide a shorter path to NIL
             if self.__dist[u] < self.__dist[NIL]:
                 # Get all adjacent vertices of the dequeued vertex u
@@ -62,7 +62,7 @@ class BipGraph(object):
                     if self.__dist[self.__pairV[v]] == INF:
                         # Consider the pair and add it to queue
                         self.__dist[self.__pairV[v]] = self.__dist[u] + 1
-                        Q.put(self.__pairV[v])
+                        Q.append(self.__pairV[v])
         # If we could come back to NIL using alternating path of distinct
         # vertices then there is an augmenting path
         return self.__dist[NIL] != INF
