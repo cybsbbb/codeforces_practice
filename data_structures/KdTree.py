@@ -4,7 +4,7 @@ import heapq
 input = sys.stdin.readline
 
 
-class k_d_tree():
+class KdTree():
     def __init__(self, points):
         self.d = len(points[0])
         self.n = len(points)
@@ -50,7 +50,7 @@ for _ in range(n):
     point = list(map(float, input().split()))
     points.append(point)
 
-tree = k_d_tree(points)
+tree = KdTree(points)
 
 q = int(input())
 for _ in range(q):
