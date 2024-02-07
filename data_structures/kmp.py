@@ -36,8 +36,8 @@ class Solution:
         prefix_a = build_prefix(a)
         prefix_b = build_prefix(b)
 
-        index_a =  kmp_match(a, s, prefix_a)
-        index_b =  kmp_match(b, s, prefix_b)
+        index_a = kmp_match(a, s, prefix_a)
+        index_b = kmp_match(b, s, prefix_b)
 
         ans = []
         j = 0
