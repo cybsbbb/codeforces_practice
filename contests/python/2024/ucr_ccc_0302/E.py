@@ -39,6 +39,7 @@ def solution():
     print(ans)
     return
 
+
 if __name__ == '__main__':
     t = 1
     for i in range(t):
