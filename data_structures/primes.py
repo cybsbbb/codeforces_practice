@@ -7,3 +7,5 @@ def primes(n):
             sieve[i*i::2*i]=[False]*((n-i*i-1)//(2*i)+1)
     return [2] + [i for i in range(3,n,2) if sieve[i]]
 
+
+print(primes(100))
