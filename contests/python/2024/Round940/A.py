@@ -1,6 +1,5 @@
 import collections
 import sys
-import math
 import heapq
 
 input = sys.stdin.readline
@@ -16,3 +15,19 @@ def insr():
 def invr():
     return (map(int, input().split()))
 
+
+def solution():
+    n = inp()
+    a = inlt()
+    ans = 0
+    cnt_a = collections.Counter(a)
+    for v in cnt_a.values():
+        ans += v // 3
+    print(ans)
+    return
+
+
+if __name__ == '__main__':
+    t = inp()
+    for i in range(t):
+        solution()
