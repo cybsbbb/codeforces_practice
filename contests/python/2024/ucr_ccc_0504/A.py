@@ -18,12 +18,15 @@ def invr():
 
 
 def solution():
-    n = inp()
-    x = inlt()
-    ans = [10000]
-    for xi in x:
-        ans.append(ans[-1] + xi)
-    print(*ans)
+    x = inp()
+    max_y = 1
+    max_v = 2
+    for y in range(2, x):
+        if math.gcd(x, y) + y > max_v:
+            max_v = math.gcd(x, y) + y
+            max_y = y
+    print(max_y)
+    return
 
 
 if __name__ == '__main__':

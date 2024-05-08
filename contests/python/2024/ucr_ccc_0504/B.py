@@ -18,12 +18,15 @@ def invr():
 
 
 def solution():
-    n = inp()
-    x = inlt()
-    ans = [10000]
-    for xi in x:
-        ans.append(ans[-1] + xi)
-    print(*ans)
+    n, m = inlt()
+    a = input()[:-1]
+    b = input()[:-1]
+    cur_a_idx = 0
+    for i in range(m):
+        if cur_a_idx < n and b[i] == a[cur_a_idx]:
+            cur_a_idx += 1
+    print(cur_a_idx)
+
 
 
 if __name__ == '__main__':

@@ -18,39 +18,42 @@ def invr():
     return (map(int, input().split()))
 
 
-MOD = 998244353
-N = 2 * 10 ** 5
-str_hash = [1]
-for i in range(N):
-    str_hash.append(str_hash[-1] * 114514 % MOD)
-inv = pow(114514, -1, MOD)
-str_hash_inv = [1]
-for i in range(N):
-    str_hash_inv.append(str_hash_inv[-1] * inv % MOD)
+def z_function(s):
+    n = len(s)
+    z = [0] * n
+    l, r = 0, 0
+    for i in range(1, n):
+        if i <= r and z[i - l] < r - i + 1:
+            z[i] = z[i - l]
+        else:
+            z[i] = max(0, r - i + 1)
+            while i + z[i] < n and s[z[i]] == s[i + z[i]]:
+                z[i] += 1
+        if i + z[i] - 1 > r:
+            l = i
+            r = i + z[i] - 1
+    return z
 
 
 def solution():
     n, l, r = inlt()
     s = input()[:-1]
-    s_hash = [0]
-    for i in range(n):
-        s_hash.append((s_hash[-1] + str_hash[i] * (ord(s[i]) - ord('a') + 233333)) % MOD)
+    z = z_function(s)
+    k = l
 
     def helper(mid):
-        target = s_hash[mid]
         cnt = 1
-        cur_idx = mid + mid
-        while cur_idx <= n:
-            if (s_hash[cur_idx] - s_hash[cur_idx - mid]) * str_hash_inv[cur_idx - mid] % MOD == target:
-                cur_idx += mid
+        cur_idx = mid
+        while cur_idx < n:
+            if z[cur_idx] >= mid:
                 cnt += 1
+                cur_idx += mid
             else:
                 cur_idx += 1
         return cnt
 
     left = 0
-    # right = min(n // l + 10, n)
-    right = n
+    right = min(n, n // k + 1)
     while left < right:
         mid = (left + right + 1) // 2
         if helper(mid) < l:
